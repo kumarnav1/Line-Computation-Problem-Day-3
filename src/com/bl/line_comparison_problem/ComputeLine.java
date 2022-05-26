@@ -1,16 +1,21 @@
-package com.bl.line_comparision_problem;
+package com.bl.line_comparison_problem;
 
 import java.util.Scanner;
 
-public class LineComparison {
+public class ComputeLine {
 
-    public static void main(String[] args) {
+    private double totalLengthOne;
+    private double totalLengthTwo;
+    private int x1Point;
+    private int x2Point;
+    private int y1Point;
+    private int y2Point;
+    private int p1Point;
+    private int p2Point;
+    private int q1Point;
+    private int q2Point;
 
-        System.out.println("Welcome to Line Comparison Problem Project");
-        int x1Point, x2Point, y1Point, y2Point;
-        int p1Point, p2Point, q1Point, q2Point;
-        double totalLengthOne;
-        double totalLengthTwo;
+    void takeInputs() {
 
         System.out.println("Enter the properties of line one");
         x1Point = takeInput(1, 'x');
@@ -22,24 +27,30 @@ public class LineComparison {
         p2Point = takeInput(2, 'q');
         q1Point = takeInput(1, 'p');
         q2Point = takeInput(2, 'q');
+    }
+
+    void printCalculatedLines() {
 
         totalLengthOne = calculateLength(x1Point, x2Point, y1Point, y2Point);
         System.out.println("The Length of the Line One : " + totalLengthOne);
-
         totalLengthTwo = calculateLength(p1Point, p2Point, q1Point, q2Point);
         System.out.println("The Length of the Line Two : " + totalLengthTwo);
-
-        isLinesEqual(totalLengthOne, totalLengthTwo);
     }
 
-    static int takeInput(int point, char tempChar) {
+    void isEqualPrint() {
 
-        Scanner refVarSc = new Scanner(System.in);
+        isEqualEqualsMethod(totalLengthOne, totalLengthTwo);
+        isLinesEqualCompareToMethod(totalLengthOne, totalLengthTwo);
+    }
+
+    int takeInput(int point, char tempChar) {
+
+        Scanner scanner = new Scanner(System.in);
         System.out.print("Enter " + tempChar + point + " Point : ");
-        return refVarSc.nextInt();
+        return scanner.nextInt();
     }
 
-    static double calculateLength(int aPoint, int bPoint, int cPoint, int dPoint) {
+    double calculateLength(int aPoint, int bPoint, int cPoint, int dPoint) {
 
         double totalLength;
         double diffForX = bPoint - aPoint;
@@ -51,14 +62,23 @@ public class LineComparison {
         return totalLength;
     }
 
-    static void isLinesEqual(Double firstLength, Double secondLength) {
+    void isEqualEqualsMethod(Double firstLength, Double secondLength) {
+
+        if (firstLength.equals(secondLength)) {
+            System.out.println("The both lines are equal");
+        } else
+            System.out.println("The both lines are not equal");
+    }
+
+    void isLinesEqualCompareToMethod(Double firstLength, Double secondLength) {
 
         int valueAfterComparison = firstLength.compareTo(secondLength);
-        if (valueAfterComparison == 0)
-            System.out.println("The both lines are equal ");
-        else if (valueAfterComparison > 0)
+        if (valueAfterComparison != 0) {
+            if (!(valueAfterComparison > 0)) {
+                System.out.println("The line Two is greater than line One");
+                return;
+            }
             System.out.println("The lines One is greater than line Two");
-        else
-            System.out.println("The line Two is greater than line One");
+        }
     }
 }
